@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Seva Hub | All Online Services one place</title>
+
+<style>
+:root {
+  --primary: #1e9b41;
+  --dark: #0d2149;
+  --muted: #06215c;
+  --bg: #d1d1d2;
+  --card: #f7ecec;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+}
+header {
+  background: linear-gradient(120deg,hwb(318 13% 45%),#081882,hwb(318 13% 45%));
+  color: rgb(143, 224, 21);
+  padding: 22px 6%;
+  
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.logo { font-size: 36px; font-weight: bold; }
+.nav a {
+  color: rgb(248, 241, 241);
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 26px;
+}
+.hero {
+  text-align: center;
+  padding: 52px 15px 35px;
+}
+.hero h1 { font-size: clamp(30px,7vw,46px); margin-bottom: 12px; }
+.hero p { color: #f5f6f7; font-size: 16px; }
+.search {
+  display: block;
+  width: min(650px,100%);
+  margin: 25px auto 0;
+  padding: 16px;
+  border: 0;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: 2px solid transparent;
+}
+.search:focus { outline-color: #9dbbff; }
+main { padding: 25px 6% 55px; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 15px;
+  margin-bottom: 35px;
+}
+.stat {
+  background: rgb(250, 243, 250);
+  border-radius: 17px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 18px #3e598f0b;
+}
+.stat strong { display: block; font-size: 17px; color: var(--primary); }
+.stat span { color: var(--muted); font-size: 14px; }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.section-head h2 { margin-bottom: 8px; }
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 18px 0 25px;
+}
+.filter {
+  border: 1px solid #d0d5dd;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.filter.active, .filter:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(235px,1fr));
+  gap: 18px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid #e4e7ec;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px #10182808;
+  display: flex;
+  flex-direction: column;
+  transition: .2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px #10182812;
+}
+.icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: #edf3ff;
+  border-radius: 13px;
+  font-size: 26px;
+}
+.card h3 { margin: 16px 0 8px; font-size: 19px; }
+.card p { color: var(--muted); line-height: 1.5; font-size: 14px; flex: 1; }
+.tag {
+  font-size: 17px;
+  color: #041b44;
+  background: #f6f8fb;
+  border-radius: 5px;
+  padding: 5px 8px;
+  align-self: flex-start;
+  margin-bottom: 15px;
+}
+.btn {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: 9px;
+  text-decoration: none;
+  background: var(--primary);
+  color: rgb(241, 232, 232);
+  font-weight: bold;
+}
+.btn:hover { background: #227c22; }
+.empty { display: none; text-align: center; padding: 35px; }
+.note {
+  margin-top: 38px;
+  padding: 17px;
+  border-radius: 17px;
+  background: #fff7e6;
+  color: #7a4b00;
+  line-height: 1.9;
+}
+footer {
+  background: #323021;
+  color: #e1dddd;
+  text-align: center;
+  padding: 1px 15px;
+  font-size: 17px;
+  font-weight: 900;
+}
+@media(max-width:600px) {
+  .stats { grid-template-columns: 1fr; }
+  .nav a { margin-left: 0; margin-right: 12px; font-size: 32px; }
+  main { padding-left: 4%; padding-right: 4%; }
+}
+h1 {
+  .digital-clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 15px;
+    margin-left: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(189, 159, 159, 0.3);
+    border-radius: 50px;
+    color: rgb(253, 242, 242);
+    white-space: nowrap;
+}
+
+#digital-clock {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+#digital-date {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+}
+
+</style>
+</head>
+
+<body>
+<header>
+  <div class="nav">
+    <div class="logo">🌐 Digital Seva Hub</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#help">Help</a>
+      <h1>
+        <div class="digital-clock">
+    <span id="digital-clock">10:30:00 AM</span>
+    <span id="digital-date">25 Oct 2026</span>
+</div>
+      </h2>
+    </nav>
+  </div>
+
+  <section class="hero" id="home">
+    <h1>All Online Services, One Place</h1>
+    <p>“ I am passionate about technology and 
+        dedicated to making digital services 
+        simple, accessible, and convenient 
+        for everyone.”</p>
+    <input id="search" class="search"
+      type="search" placeholder="🔍 Service search..."
+      aria-label="Search services">
+  </section>
+</header>
+
+<main>
+  <section class="stats">
+    <div class="stat"><strong id="total">0</strong><span>Available Services</span></div>
+    <div class="stat"><strong>24×7</strong><span>Website Access</span></div>
+    <div class="stat"><strong>Direct</strong><span>Official Portal Links</span></div>
+  </section>
+
+  <section id="services">
+    <div class="section-head">
+      <h2>Popular Online Services</h2>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-category="All">All Services</button>
+      <button class="filter" data-category="Identity">ID Cards</button>
+      <button class="filter" data-category="Government">Government</button>
+      <button class="filter" data-category="Transport">Transport</button>
+      <button class="filter" data-category="Finance">Tax & Finance</button>
+      <button class="filter" data-category="Other">Other</button>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">Koi service nahi mili. Dusra naam search karein.</div>
+  </section>
+
+  <section id="help" class="note">
+    <strong>⚠️ Important:</strong> This is an independent service directory 
+    and is not a government website. Please check application details, fees, and eligibility 
+    on the relevant official portal. Do not enter Aadhaar OTPs, passwords, bank details, or 
+    identity documents on this directory. Use only verified official links.
+  </section>
+</main>
+
+<footer>
+  <p>@ <span id="year"> </span>Designed & Developed by Anuj Vishwakarma | Web Developer & Tech Enthusiast.</p>
+  
+</footer>
+
+<script>
+const services = [
+  {
+    name: "PAN Card Apply",
+    icon: "💳",
+    category: "Identity",
+    desc: "Naya PAN, correction and anya PAN services.",
+    url: "https://www.pan.utiitsl.com/"
+  },
+  {
+    name: "Income Tax e-Filing",
+    icon: "📊",
+    category: "Finance",
+    desc: "Income tax portal and e-PAN sambandhit services.",
+    url: "https://www.incometax.gov.in/"
+  },
+  {
+    name: "Aadhaar / UIDAI",
+    icon: "🪪",
+    category: "Identity",
+    desc: "Aadhaar download, updates and official information.",
+    url: "https://uidai.gov.in/"
+  },
+  {
+    name: "Ayushman card Apply",
+    icon: "🪪",
+    category: "Identity",
+    desc: "Ayushman card download, and Check status.",
+    url: "https://beneficiary.nha.gov.in/"
+  },
+  {
+    name: "Voter ID Services",
+    icon: "🗳️",
+    category: "Identity",
+    desc: "Voter registration, correction and voter services.",
+    url: "https://voters.eci.gov.in/"
+  },
+  {
+    name: "Passport Seva",
+    icon: "🛂",
+    category: "Identity",
+    desc: "Passport application and appointment services.",
+    url: "https://www.passportindia.gov.in/"
+  },
+  {
+    name: "DigiLocker",
+    icon: "📁",
+    category: "Identity",
+    desc: "Digital documents and issued certificates.",
+    url: "https://www.digilocker.gov.in/"
+  },
+  {
+    name: "Driving Licence / Parivahan",
+    icon: "🚘",
+    category: "Transport",
+    desc: "Driving licence and transport-related services.",
+    url: "https://parivahan.gov.in/"
+  },
+  {
+    name: "Vehicle Services",
+    icon: "🚗",
+    category: "Transport",
+    desc: "Vehicle registration and sambandhit services.",
+    url: "https://vahan.parivahan.gov.in/"
+  },
+  {
+    name: "GST Portal",
+    icon: "🧾",
+    category: "Finance",
+    desc: "GST registration, returns and tax services.",
+    url: "https://www.gst.gov.in/"
+  },
+  {
+    name: "EPFO",
+    icon: "🏢",
+    category: "Government",
+    desc: "Provident fund and employee services.",
+    url: "https://www.epfindia.gov.in/"
+  },
+  {
+    name: "e-Shram",
+    icon: "👷",
+    category: "Government",
+    desc: "Apply Online and Download  services.",
+    url: "https://eshram.gov.in/"
+  },
+  {
+    name: "PM Kisan",
+    icon: "🌾",
+    category: "Government",
+    desc: "Farmer scheme information and beneficiary services.",
+    url: "https://pmkisan.gov.in/"
+  },
+  {
+    name: "National Scholarship Portal",
+    icon: "🎓",
+    category: "Other",
+    desc: "Scholarship schemes and application information.",
+    url: "https://scholarships.gov.in/"
+  },
+  {
+    name: "India Government Services",
+    icon: "🇮🇳",
+    category: "Government",
+    desc: "india Government sarives.",
+    url: "https://services.india.gov.in/"
+  }
+];
+
+let activeCategory = "All";
+
+const grid = document.getElementById("grid");
+const search = document.getElementById("search");
+const empty = document.getElementById("empty");
+
+function renderServices() {
+  const query = search.value.trim().toLowerCase();
+
+  const filtered = services.filter(service => {
+    const matchesCategory =
+      activeCategory === "All" ||
+      service.category === activeCategory;
+
+    const matchesSearch =
+      (service.name + " " + service.desc + " " + service.category)
+      .toLowerCase().includes(query);
+
+    return matchesCategory && matchesSearch;
+  });
+
+  grid.innerHTML = filtered.map(service => `
+    <article class="card">
+      <div class="icon">${service.icon}</div>
+      <h3>${escapeHTML(service.name)}</h3>
+      <p>${escapeHTML(service.desc)}</p>
+      <span class="tag">${escapeHTML(service.category)}</span>
+      <a class="btn"
+         href="${safeURL(service.url)}"
+         target="_blank"
+         rel="noopener noreferrer">
+         Open Official Website ↗
+      </a>
+    </article>
+  `).join("");
+
+  empty.style.display = filtered.length ? "none" : "block";
+  document.getElementById("total").textContent = services.length;
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function safeURL(value) {
+  try {
+    const url = new URL(value);
+    if (url.protocol === "https:") return url.href;
+  } catch (error) {}
+  return "#";
+}
+
+document.getElementById("filters").addEventListener("click", event => {
+  const button = event.target.closest("button[data-category]");
+  if (!button) return;
+
+  activeCategory = button.dataset.category;
+
+  document.querySelectorAll(".filter").forEach(item => {
+    item.classList.toggle("active", item === button);
+  });
+
+  renderServices();
+});
+
+search.addEventListener("input", renderServices);
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderServices();
+</script>
+</body>
+</html>
+
+
+
+<div class="contact-section">
+  <h3>📞 Contact Us</h3>
+
+  <div class="contact-links">
+    <a href="https://wa.me/918429700101"
+       target="_blank" rel="noopener noreferrer">
+      💬 WhatsApp <span>+91 8429700101</span>
+    </a>
+
+    <a href="mailto:anujgs2020@gmail.com">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
+           alt="Gmail logo">
+      <span>anujgs2020@gmail.com</span>
+    </a>
+
+    <a href="https://www.instagram.com/anuj.vish101/"
+       target="_blank" rel="noopener noreferrer">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png"
+           alt="Instagram logo">
+      <span>@anuj.vish101</span>
+    </a>
+  </div>
+</div>
+<style>
+    .contact-section {
+  text-align: center;
+  padding: 12px 10px;
+  background: #fff7e6;
+  border-top: 2px solid #f8f2f2;
+}
+
+.contact-section h3 {
+  color: #7a4b00;
+  font-size: 19px;
+  margin: 0 0 12px;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-weight: 900;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid #ad2e2e;
+  border-radius: 12px;
+  color:#7a4b00;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.contact-links a img {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+}
+
+.contact-links a:hover {
+  color: #7a002f;
+  border-color: #421638;
+}
+
+@media (max-width: 600px) {
+  .contact-links {
+    flex-direction: column;
+  }
+
+  .contact-links a {
+    width: fit-content;
+    max-width: 95%;
+    overflow-wrap: anywhere;
+  }
+}
+</style>
+<script>
+function updateClock() {
+    const now = new Date();
+
+    document.getElementById("digital-clock").textContent =
+        now.toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true
+        });
+
+    document.getElementById("digital-date").textContent =
+        now.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
