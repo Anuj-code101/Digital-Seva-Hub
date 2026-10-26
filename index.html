@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB7LN85HMJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB7LN85HMJ');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Digital Seva Hub | All Online Services one place</title>
@@ -557,7 +566,7 @@ function updateClock() {
             hour: "2-digit",
             minute: "2-digit",
             second: "2-digit",
-            hour12: true
+            hour12: false
         });
 
     document.getElementById("digital-date").textContent =
@@ -569,5 +578,5 @@ function updateClock() {
 }
 
 updateClock();
-setInterval(updateClock, 1000);
+setInterval(updateClock, 0000);
 </script>
